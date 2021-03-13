@@ -1,11 +1,19 @@
+// importing react component from react libary
+
 import React from 'react';
+
+// importing StyleSheet, Text, View, Animated from react native libary
 import { StyleSheet, Text, View, Animated } from 'react-native';
 
+// importing api key from utilies weather api
 import { API_KEY } from './utils/WeatherAPIKey';
 
+// importing weather component from weather libary
 import Weather from './components/Weather';
 
+// creating an component app extend from react component
 export default class App extends React.Component {
+  // defining the variable of the object the state of app componeent
   state = {
     isLoading: true,
     temperature: 0,
@@ -13,6 +21,7 @@ export default class App extends React.Component {
     error: null
   };
 
+  // react component loaded succecfully
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -26,6 +35,7 @@ export default class App extends React.Component {
     );
   }
 
+  // fetching the lat & lon from the weather api
   fetchWeather(lat, lon) {
     fetch(
       `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}&units=metric`
@@ -41,6 +51,7 @@ export default class App extends React.Component {
       });
   }
 
+  // loading the weather call from api
   render() {
     const { isLoading, weatherCondition, temperature } = this.state;
     return (
@@ -57,6 +68,7 @@ export default class App extends React.Component {
   }
 }
 
+// stylesheet to display info
 const styles = StyleSheet.create({
   container: {
     flex: 1,
